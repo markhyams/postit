@@ -1,0 +1,13 @@
+<h1>All Dogs!</h1>
+
+<p><%= link_to('[new dog]', new_dog_path) %></p>
+
+<ul>
+  <% @dogs.each do |dog| %>
+    <li>
+      <%= link_to('[edit]', edit_dog_path(dog)) %>
+      <%= link_to('[delete]', dog_path(dog), method: :delete, data: { confirm: "Are you sure?"}) %>
+      <%= dog_info(dog) %> 
+    </li>
+  <% end %>
+</ul>

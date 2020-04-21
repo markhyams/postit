@@ -1,0 +1,14 @@
+<%= render 'shared/errors', obj: @dog %>
+
+<%= form_for @dog do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br/>
+  <%= f.label :height_in_inches %>
+  <%= f.text_field :height_in_inches %>
+  <br/>
+  <%= f.label :weight_in_lbs %>
+  <%= f.text_field :weight_in_lbs %>
+  <br/>
+  <%= f.submit "#{@dog.new_record? ? 'Create' : 'Update'} dog" %>
+<% end %>
