@@ -3,8 +3,25 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :post_categories
   has_many :categories, through: :post_categories
+  has_many :votes, as: :voteable
 
   validates :title, presence: true, length: {minimum: 5}
   validates :description, presence: true
   validates :url, presence: true, uniqueness: true
+
+  def total_votes
+    self.up_votes - self.down_votes
+  end
+
+  def up_votes
+    votes.where(vote: true).size
+  end
+
+  def down_votes
+    votes.where(vote: false).size
+  end
+
+  def sorted_comments
+    self.comments.sort_by { |x| x.total_votes }.reverse
+  end
 end
